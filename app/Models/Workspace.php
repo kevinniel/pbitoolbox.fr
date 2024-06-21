@@ -24,4 +24,9 @@ class Workspace extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

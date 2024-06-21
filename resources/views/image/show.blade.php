@@ -54,21 +54,33 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <section>
-                        <header>
+                        <header class="pb-3">
                             <h2 class="text-lg font-medium text-gray-900">
                                 Images
                             </h2>
                         </header>
-                        <div class="space-y-4">
+                        <div class="grid grid-cols-4 gap-5">
                             @foreach($images as $image)
-                                <img src="{{ asset($image->getImageUrl()) }}"
-                                     alt="{{ $image->name }}"
-                                     style="width: 100px; height: 100px">
-                                <form action="{{ route('image.destroy', $image) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <x-danger-button type="submit">Supprimer</x-danger-button>
-                                </form>
+                                <div
+                                    class="min-h-[280px] h-[280px] rounded-lg flex items-end w-full relative"
+                                    style="background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8) 100%), url({{ asset($image->getImageUrl()) }}); background-repeat: no-repeat; object-fit: contain;">
+                                    <div class="px-6 py-4 w-full">
+                                        <form action="{{ route('image.destroy', $image) }}" method="post"
+                                              class="absolute top-4 right-4">
+                                            @csrf
+                                            @method('delete')
+                                            <x-secondary-button type="submit">X</x-secondary-button>
+                                        </form>
+                                        <div class="flex gap-2 pb-2">
+                                            <span
+                                                class="text-gray-300 font-medium text-sm">{{ $image->created_at->format('d M, Y')  }}</span>
+                                            <span class="text-gray-300 font-medium text-sm">|</span>
+                                            <span
+                                                class="text-gray-300 font-medium text-sm">{{ $image->user->name }}</span>
+                                        </div>
+                                        <h3 class="text-white text-xl font-bold">{{ $image->name }}</h3>
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
                     </section>

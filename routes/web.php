@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\WorkspaceController as AdminWorkspaceController;
+use App\Http\Controllers\Api\ApiCommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
@@ -10,7 +11,7 @@ use App\Http\Middlewares\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
         Route::post('{workspace}/images', [ImageController::class, 'store'])->name('store');
         Route::delete('{image}', [ImageController::class, 'destroy'])->name('destroy');
     });
+});
+
+Route::prefix('api')->as('api.')->group(function () {
+    Route::post('comment', [ApiCommentController::class, 'store'])->name('comment.store');
 });
 
 require __DIR__ . '/auth.php';
