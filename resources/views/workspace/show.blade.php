@@ -16,7 +16,7 @@
                 <div class="p-6 text-gray-900">
                     <div class="space-y-4">
                         <div class="border border-gray-200 rounded-lg">
-                            <a href="{{ route('image.show', $workspace) }}">
+                            <a href="{{ route('image.show', $workspace->slug) }}">
                                 <div class="p-4 relative">
                                     <h3 class="text-md font-medium pb-1">Module Images</h3>
                                     <p class="text-gray-500 text-sm">XX Images</p>

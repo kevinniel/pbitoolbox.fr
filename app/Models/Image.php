@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
-    protected $fillable = ['url', 'name', 'workspace_id', 'user_id'];
+    protected $fillable = ['images_id', 'url', 'name', 'workspace_id', 'user_id'];
 
     public function getImageUrl(): string|null
     {

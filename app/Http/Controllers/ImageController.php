@@ -11,21 +11,28 @@ use Illuminate\View\View;
 
 class ImageController extends Controller
 {
-    public function show(Workspace $workspace): View
+    public function show(string $slug): View
     {
+        $workspace = Workspace::where('slug', $slug)->firstOrFail();
+
         return view('image.show', [
             'workspace' => $workspace,
             'images' => $workspace->images,
         ]);
     }
 
-    public function store(Workspace $workspace, ImageRequest $request): RedirectResponse
+    public function store(string $slug, ImageRequest $request): RedirectResponse
     {
+        $workspace = Workspace::where('slug', $slug)->firstOrFail();
+
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');
 
+        $lastId = Image::orderBy('id', 'desc')->first() ? Image::orderBy('id', 'desc')->first()->id : 0;
+
         if ($image != null || !$image->getError()) {
             Image::create([
+                'images_id' => 'images_' . $lastId + 1,
                 'url' => $image->store('workspace/' . $workspace->id . '/images', 'public'),
                 'name' => $request->get('name'),
                 'user_id' => auth()->id(),
@@ -33,13 +40,13 @@ class ImageController extends Controller
             ]);
         }
 
-        return redirect()->route('image.show', $workspace);
+        return redirect()->route('image.show', $workspace->slug);
     }
 
     public function destroy(Image $image): RedirectResponse
     {
         $image->delete();
 
-        return redirect()->route('image.show', $image->workspace);
+        return redirect()->route('image.show', $image->workspace->slug);
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\View\View;
 
 class WorkspaceController extends Controller
 {
-    public function show(Workspace $workspace): View
+    public function show(string $slug): View
     {
+        $workspace = Workspace::where('slug', $slug)->firstOrFail();
+
         return view('workspace.show', [
             'workspace' => $workspace,
         ]);

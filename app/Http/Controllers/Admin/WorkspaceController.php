@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,7 +22,13 @@ class WorkspaceController extends Controller
 
     public function store(WorkspaceRequest $request): RedirectResponse
     {
-        Workspace::create($request->validated());
+        $lastId = Workspace::orderBy('id', 'desc')->first() ? Workspace::orderBy('id', 'desc')->first()->id : 0;
+
+        Workspace::create([
+            ...$request->validated(),
+            'slug' => Str::slug($request->get('name')),
+            'workspaces_id' => 'workspaces_' . $lastId + 1,
+        ]);
 
         return redirect()->route('admin.dashboard');
     }
@@ -33,7 +40,10 @@ class WorkspaceController extends Controller
 
     public function update(WorkspaceRequest $request, Workspace $workspace): RedirectResponse
     {
-        $workspace->update($request->validated());
+        $workspace->update([
+            ...$request->validated(),
+            'slug' => Str::slug($request->get('name')),
+        ]);
 
         return redirect()->route('admin.dashboard');
     }

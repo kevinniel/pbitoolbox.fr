@@ -38,19 +38,18 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('workspace')->as('workspace.')->group(function () {
-        Route::get('{workspace}', [WorkspaceController::class, 'show'])->name('show');
+    Route::prefix('workspace')->group(function () {
+        Route::get('{slug}', [WorkspaceController::class, 'show'])->name('workspace.show');
+
+        Route::get('{slug}/images', [ImageController::class, 'show'])->name('image.show');
+        Route::post('{slug}/images', [ImageController::class, 'store'])->name('image.store');
+        Route::delete('{image}', [ImageController::class, 'destroy'])->name('image.destroy');
     });
 
-    Route::prefix('image')->as('image.')->group(function () {
-        Route::get('{workspace}/images', [ImageController::class, 'show'])->name('show');
-        Route::post('{workspace}/images', [ImageController::class, 'store'])->name('store');
-        Route::delete('{image}', [ImageController::class, 'destroy'])->name('destroy');
-    });
 });
 
 Route::prefix('api')->as('api.')->group(function () {
-    Route::post('comment', [ApiCommentController::class, 'store'])->name('comment.store');
+    Route::post('comment/{workspace}', [ApiCommentController::class, 'store'])->name('comment.store');
 });
 
 require __DIR__ . '/auth.php';

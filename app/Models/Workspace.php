@@ -12,7 +12,9 @@ class Workspace extends Model
     use HasFactory;
 
     protected $fillable = [
+        'workspaces_id',
         'name',
+        'slug',
     ];
 
     public function users(): BelongsToMany

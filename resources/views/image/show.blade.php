@@ -5,7 +5,8 @@
                 {{ $workspace->name }} / Module Images
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('workspace.show', $workspace) }}">Retour</x-link-button-primary>
+                <x-link-button-primary link="{{ route('workspace.show', $workspace->slug) }}">Retour
+                </x-link-button-primary>
             </div>
         </div>
     </x-slot>
@@ -21,7 +22,8 @@
                                     Ajouter une image
                                 </h2>
                             </header>
-                            <form method="post" action="{{ route('image.store', $workspace) }}" class="mt-6 space-y-6"
+                            <form method="post" action="{{ route('image.store', ['slug' => $workspace->slug]) }}"
+                                  class="mt-6 space-y-6"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="flex gap-4 justify-between w-full items-end">
@@ -65,12 +67,14 @@
                                     class="min-h-[280px] h-[280px] rounded-lg flex items-end w-full relative"
                                     style="background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8) 100%), url({{ asset($image->getImageUrl()) }}); background-repeat: no-repeat; object-fit: contain;">
                                     <div class="px-6 py-4 w-full">
-                                        <form action="{{ route('image.destroy', $image) }}" method="post"
-                                              class="absolute top-4 right-4">
-                                            @csrf
-                                            @method('delete')
-                                            <x-secondary-button type="submit">X</x-secondary-button>
-                                        </form>
+                                        @if(auth()->user()->id === $image->user_id)
+                                            <form action="{{ route('image.destroy', $image) }}" method="post"
+                                                  class="absolute top-4 right-4">
+                                                @csrf
+                                                @method('delete')
+                                                <x-secondary-button type="submit">X</x-secondary-button>
+                                            </form>
+                                        @endif
                                         <div class="flex gap-2 pb-2">
                                             <span
                                                 class="text-gray-300 font-medium text-sm">{{ $image->created_at->format('d M, Y')  }}</span>

@@ -21,8 +21,9 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        Workspace::factory(10)
-            ->has(User::factory()->count(10))
-            ->create();
+        foreach (range(1, 10) as $index) {
+            $workspace = Workspace::factory()->create();
+            $workspace->users()->saveMany(User::factory(10)->make());
+        }
     }
 }

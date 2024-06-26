@@ -12,6 +12,7 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->string('images_id')->unique();
             $table->string('url')->nullable();
             $table->string('name');
             $table->foreignIdFor(Workspace::class)->nullable()->constrained()->nullOnDelete();
