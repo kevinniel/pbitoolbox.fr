@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-medium text-xl text-gray-800 leading-tight">
                 {{ $workspace->name }} / Module Images
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('workspace.show', $workspace->slug) }}">Retour
-                </x-link-button-primary>
+                <x-link-button-secondary link="{{ route('workspace.show', $workspace->slug) }}">Retour
+                </x-link-button-secondary>
             </div>
         </div>
     </x-slot>
@@ -63,28 +63,42 @@
                         </header>
                         <div class="grid grid-cols-4 gap-5">
                             @foreach($images as $image)
-                                <div
-                                    class="min-h-[280px] h-[280px] rounded-lg flex items-end w-full relative"
-                                    style="background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8) 100%), url({{ asset($image->getImageUrl()) }}); background-repeat: no-repeat; object-fit: contain;">
-                                    <div class="px-6 py-4 w-full">
-                                        @if(auth()->user()->id === $image->user_id)
-                                            <form action="{{ route('image.destroy', $image) }}" method="post"
-                                                  class="absolute top-4 right-4">
-                                                @csrf
-                                                @method('delete')
-                                                <x-secondary-button type="submit">X</x-secondary-button>
-                                            </form>
-                                        @endif
-                                        <div class="flex gap-2 pb-2">
+                                <article class="space-y-2.5">
+                                    <div
+                                        class="min-h-[280px] h-[280px] rounded-lg flex items-end w-full relative"
+                                        style="background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8) 100%), url({{ asset($image->getImageUrl()) }}); background-repeat: no-repeat; object-fit: contain; background-position: center">
+                                        <div class="px-6 py-4 w-full">
+                                            <div class="absolute top-4 right-4 flex gap-2">
+                                                @if(auth()->user()->id === $image->user_id)
+                                                    <form action="{{ route('image.destroy', $image) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <x-secondary-button type="submit" style="padding: 10px; width: 30px;height: 30px">
+                                                            <i class="fas fa-times"></i>
+                                                        </x-secondary-button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                            <div class="flex gap-2 pb-2">
                                             <span
-                                                class="text-gray-300 font-medium text-sm">{{ $image->created_at->format('d M, Y')  }}</span>
-                                            <span class="text-gray-300 font-medium text-sm">|</span>
-                                            <span
-                                                class="text-gray-300 font-medium text-sm">{{ $image->user->name }}</span>
+                                                class="text-gray-300 font-semibold text-sm">{{ $image->created_at->format('d M, Y')  }}</span>
+                                                <span class="text-gray-300 font-semibold text-sm">|</span>
+                                                <span
+                                                    class="text-gray-300 font-semibold text-sm">{{ $image->user->name }}</span>
+                                            </div>
+                                            <h3 class="text-white text-xl font-bold">{{ $image->name }}</h3>
                                         </div>
-                                        <h3 class="text-white text-xl font-bold">{{ $image->name }}</h3>
                                     </div>
-                                </div>
+                                    <div class="flex items-center justify-between gap-1">
+                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs"
+                                                      :value="asset($image->getImageUrl())"/>
+                                        <x-secondary-button
+                                            type="button" data-copy="{{ asset($image->getImageUrl()) }}"
+                                            onclick="copyToClipboard(this)" style="padding-left: 12px; padding-right: 12px">
+                                            <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
+                                        </x-secondary-button>
+                                    </div>
+                                </article>
                             @endforeach
                         </div>
                     </section>
@@ -93,3 +107,21 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function copyToClipboard(element) {
+        var text = element.getAttribute('data-copy');
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        element.innerHTML = "<i class='text-xs fas fa-clipboard-check text-gray-600 w-[12px] h-[16px] text-primary'></i>";
+
+        window.setTimeout(function() {
+            element.innerHTML = "<i class='text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]'></i>";
+        }, 2000);
+    }
+</script>

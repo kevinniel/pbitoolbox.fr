@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AuthorisationController;
 use App\Http\Controllers\Admin\WorkspaceController as AdminWorkspaceController;
 use App\Http\Controllers\Api\ApiCommentController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
@@ -35,6 +37,9 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         Route::delete('/{workspace}/removeUser', [AdminWorkspaceController::class, 'removeUser'])->name('removeUser');
     });
 
+    Route::prefix('admin/authorisation')->as('admin.authorisation.')->group(function () {
+        Route::get('/{workspace}', [AuthorisationController::class, 'show'])->name('show');
+    });
 });
 
 Route::middleware('auth')->group(function () {
@@ -44,6 +49,8 @@ Route::middleware('auth')->group(function () {
         Route::get('{slug}/images', [ImageController::class, 'show'])->name('image.show');
         Route::post('{slug}/images', [ImageController::class, 'store'])->name('image.store');
         Route::delete('{image}', [ImageController::class, 'destroy'])->name('image.destroy');
+
+        Route::get('{slug}/comments', [CommentController::class, 'show'])->name('comment.show');
     });
 
 });

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-medium text-xl text-gray-800 leading-tight">
                 Modifier un Workspace
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('admin.dashboard') }}">Retour</x-link-button-primary>
+                <x-link-button-secondary link="{{ route('admin.dashboard') }}">Retour</x-link-button-secondary>
             </div>
         </div>
     </x-slot>

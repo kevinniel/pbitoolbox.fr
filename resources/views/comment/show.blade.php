@@ -2,8 +2,12 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-medium text-xl text-gray-800 leading-tight">
-                Tableau de board
+                {{ $workspace->name }} / Module Commentaires
             </h2>
+            <div>
+                <x-link-button-secondary link="{{ route('workspace.show', $workspace->slug) }}">Retour
+                </x-link-button-secondary>
+            </div>
         </div>
     </x-slot>
 
@@ -12,14 +16,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="space-y-4">
-                        @foreach($workspaces as $workspace)
+                        @foreach($comments as $comment)
                             <div class="border border-gray-200 rounded-lg">
-                                <a href="{{ route('workspace.show', $workspace->slug) }}">
+                                <div>
                                     <div class="p-4 relative">
-                                        <h3 class="text-md font-medium pb-1">{{ $workspace->name }}</h3>
-                                        <p class="text-gray-500 text-sm">XX utilisateurs | XX modules</p>
+                                        <p class="text-gray-500 text-sm">“{{ $comment->content }}”</p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         @endforeach
                     </div>

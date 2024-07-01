@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-medium text-xl text-gray-800 leading-tight">
                 {{ $workspace->name }}
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('dashboard') }}">Retour</x-link-button-primary>
+                <x-link-button-secondary link="{{ route('dashboard') }}">Retour</x-link-button-secondary>
             </div>
         </div>
     </x-slot>
@@ -20,6 +20,14 @@
                                 <div class="p-4 relative">
                                     <h3 class="text-md font-medium pb-1">Module Images</h3>
                                     <p class="text-gray-500 text-sm">XX Images</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg">
+                            <a href="{{ route('comment.show', $workspace->slug) }}">
+                                <div class="p-4 relative">
+                                    <h3 class="text-md font-medium pb-1">Module Commentaires</h3>
+                                    <p class="text-gray-500 text-sm">XX Commentaires</p>
                                 </div>
                             </a>
                         </div>

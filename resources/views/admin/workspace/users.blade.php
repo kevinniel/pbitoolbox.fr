@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $workspace->name }} - Utilisateurs
+            <h2 class="font-medium text-xl text-gray-800 leading-tight">
+                {{ $workspace->name }} / Utilisateurs
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('admin.dashboard') }}">Retour</x-link-button-primary>
+                <x-link-button-secondary link="{{ route('admin.dashboard') }}">Retour</x-link-button-secondary>
             </div>
         </div>
     </x-slot>
@@ -66,7 +66,7 @@
                                             <div class="p-4 relative">
                                                 <h3 class="text-md font-medium pb-1">{{ $user->name }}</h3>
                                                 <p class="text-gray-500 text-sm">{{ $user->email }}</p>
-                                                <div class="absolute top-4 right-4">
+                                                <div class="absolute top-2 right-4">
                                                     <form
                                                         action="{{ route('admin.workspace.removeUser', $workspace) }} "
                                                         method="post">
@@ -74,7 +74,7 @@
                                                         @method('delete')
                                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                                                         <button type="submit" class="normal-case text-sm font-medium">
-                                                            Supprimer
+                                                            <i class="fas fa-times text-gray-400 duration-200 hover:text-gray-700"></i>
                                                         </button>
                                                     </form>
                                                 </div>

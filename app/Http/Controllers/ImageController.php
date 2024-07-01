@@ -33,7 +33,7 @@ class ImageController extends Controller
         if ($image != null || !$image->getError()) {
             Image::create([
                 'images_id' => 'images_' . $lastId + 1,
-                'url' => $image->store('workspace/' . $workspace->id . '/images', 'public'),
+                'url' => $image->store('workspace/' . $workspace->slug . '/images', 'public'),
                 'name' => $request->get('name'),
                 'user_id' => auth()->id(),
                 'workspace_id' => $workspace->id,

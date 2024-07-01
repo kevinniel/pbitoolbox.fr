@@ -20,4 +20,14 @@ class ProfileUpdateRequest extends FormRequest
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Le nom est obligatoire.',
+            'email.required' => 'L\'email est obligatoire.',
+            'email.email' => 'L\'email est invalide.',
+            'email.unique' => 'Cet email est déjà utilisé.',
+        ];
+    }
 }

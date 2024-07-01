@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-medium text-xl text-gray-800 leading-tight">
                 Tableau de board
             </h2>
             <div>
@@ -21,7 +21,7 @@
                                     <h3 class="text-md font-medium pb-1">{{ $workspace->name }}</h3>
                                     <p class="text-gray-500 text-sm">XX utilisateurs | XX modules</p>
                                     <div class="absolute top-4 right-4">
-                                        <a href="{{ route('admin.workspace.edit', $workspace) }}" class="normal-case text-sm font-medium">
+                                        <a href="{{ route('admin.workspace.edit', $workspace) }}" class="normal-case text-sm font-medium opacity-10">
                                             Edit
                                         </a>
                                     </div>
@@ -29,11 +29,11 @@
                                 <div class="border-t border-gray-200 grid grid-cols-2">
                                     <a href="{{ route('admin.workspace.users', $workspace) }}"
                                        class="flex justify-center items-center text-center py-3 font-medium text-sm border-r border-gray-200 hover:bg-gray-50">
-                                        Utilisateurs
+                                        <i class="fas fa-users mr-2 text-gray-600"></i> Utilisateurs
                                     </a>
-                                    <a href="#"
+                                    <a href="{{ route('admin.authorisation.show', $workspace) }}"
                                        class="flex justify-center items-center text-center py-3 font-medium text-sm hover:bg-gray-50">
-                                        Modules
+                                        <i class="fas fa-lock mr-2 text-gray-600"></i> Modules
                                     </a>
                                 </div>
                             </div>
