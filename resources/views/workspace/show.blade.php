@@ -19,7 +19,7 @@
                             <a href="{{ route('image.show', $workspace->slug) }}">
                                 <div class="p-4 relative">
                                     <h3 class="text-md font-medium pb-1">Module Images</h3>
-                                    <p class="text-gray-500 text-sm">XX Images</p>
+                                    <p class="text-gray-500 text-sm">{{ count($workspace->images) }} Images</p>
                                 </div>
                             </a>
                         </div>
@@ -27,7 +27,7 @@
                             <a href="{{ route('comment.show', $workspace->slug) }}">
                                 <div class="p-4 relative">
                                     <h3 class="text-md font-medium pb-1">Module Commentaires</h3>
-                                    <p class="text-gray-500 text-sm">XX Commentaires</p>
+                                    <p class="text-gray-500 text-sm">{{ count($workspace->comments) }} Commentaires</p>
                                 </div>
                             </a>
                         </div>

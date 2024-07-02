@@ -5,7 +5,8 @@
                 Tableau de board
             </h2>
             <div>
-                <x-link-button-primary link="{{ route('admin.workspace.create') }}">Créer un Workspace</x-link-button-primary>
+                <x-link-button-primary link="{{ route('admin.workspace.create') }}">Créer un Workspace
+                </x-link-button-primary>
             </div>
         </div>
     </x-slot>
@@ -19,9 +20,11 @@
                             <div class="border border-gray-200 rounded-lg">
                                 <div class="p-4 relative">
                                     <h3 class="text-md font-medium pb-1">{{ $workspace->name }}</h3>
-                                    <p class="text-gray-500 text-sm">XX utilisateurs | XX modules</p>
+                                    <p class="text-gray-500 text-sm">{{ $workspace->users_count }} utilisateurs | 3
+                                        modules</p>
                                     <div class="absolute top-4 right-4">
-                                        <a href="{{ route('admin.workspace.edit', $workspace) }}" class="normal-case text-sm font-medium opacity-10">
+                                        <a href="{{ route('admin.workspace.edit', $workspace) }}"
+                                           class="normal-case text-sm font-medium opacity-40 hover:opacity-100">
                                             Edit
                                         </a>
                                     </div>

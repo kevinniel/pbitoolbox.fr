@@ -17,7 +17,7 @@
                                 <a href="{{ route('workspace.show', $workspace->slug) }}">
                                     <div class="p-4 relative">
                                         <h3 class="text-md font-medium pb-1">{{ $workspace->name }}</h3>
-                                        <p class="text-gray-500 text-sm">XX utilisateurs | XX modules</p>
+                                        <p class="text-gray-500 text-sm">{{ count($workspace->users) }} utilisateurs | 3 modules</p>
                                     </div>
                                 </a>
                             </div>
