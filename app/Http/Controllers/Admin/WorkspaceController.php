@@ -20,6 +20,15 @@ class WorkspaceController extends Controller
         return view('admin.workspace.create');
     }
 
+    public function show(string $slug): View
+    {
+        $workspace = Workspace::where('slug', $slug)->firstOrFail();
+
+        return view('admin.workspace.show', [
+            'workspace' => $workspace,
+        ]);
+    }
+
     public function store(WorkspaceRequest $request): RedirectResponse
     {
         $lastId = Workspace::orderBy('id', 'desc')->first() ? Workspace::orderBy('id', 'desc')->first()->id : 0;

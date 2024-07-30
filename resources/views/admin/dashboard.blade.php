@@ -19,7 +19,7 @@
                         @foreach($workspaces as $workspace)
                             <div class="border border-gray-200 rounded-lg">
                                 <div class="p-4 relative">
-                                    <h3 class="text-md font-medium pb-1">{{ $workspace->name }}</h3>
+                                    <a href="{{ route('admin.workspace.show', $workspace->slug) }}" class="text-md pb-1 font-bold">{{ $workspace->name }}</a>
                                     <p class="text-gray-500 text-sm">{{ $workspace->users_count }} utilisateurs | 3
                                         modules</p>
                                     <div class="absolute top-4 right-4">
@@ -28,6 +28,11 @@
                                             Edit
                                         </a>
                                     </div>
+                                </div>
+                                <div class="px-4 mb-4">
+                                    <p class="font-semibold text-sm pb-1">Api module :</p>
+                                    <p class="text-sm text-gray-500">Commentaire : {{ env('APP_URL') . '/comment/' . $workspace->id }}</p>
+                                    <p class="text-sm text-gray-500">Statistique : {{ env('APP_URL') . '/stat/' . $workspace->id }}</p>
                                 </div>
                                 <div class="border-t border-gray-200 grid grid-cols-2">
                                     <a href="{{ route('admin.workspace.users', $workspace) }}"

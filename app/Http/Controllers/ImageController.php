@@ -15,6 +15,10 @@ class ImageController extends Controller
     {
         $workspace = Workspace::where('slug', $slug)->firstOrFail();
 
+        if(!$workspace->can_access_image && !auth()->user()->is_admin) {
+            abort(404);
+        }
+
         return view('image.show', [
             'workspace' => $workspace,
             'images' => $workspace->images,
@@ -40,13 +44,13 @@ class ImageController extends Controller
             ]);
         }
 
-        return redirect()->route('image.show', $workspace->slug);
+        return redirect()->back();
     }
 
     public function destroy(Image $image): RedirectResponse
     {
         $image->delete();
 
-        return redirect()->route('image.show', $image->workspace->slug);
+        return redirect()->back();
     }
 }

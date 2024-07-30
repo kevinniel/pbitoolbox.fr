@@ -5,8 +5,13 @@
                 {{ $workspace->name }} / Module Images
             </h2>
             <div>
-                <x-link-button-secondary link="{{ route('workspace.show', $workspace->slug) }}">Retour
-                </x-link-button-secondary>
+                @if(auth()->user()->is_admin)
+                    <x-link-button-secondary link="{{ route('admin.workspace.show', $workspace->slug) }}">Retour
+                    </x-link-button-secondary>
+                @else
+                    <x-link-button-secondary link="{{ route('workspace.show', $workspace->slug) }}">Retour
+                    </x-link-button-secondary>
+                @endif
             </div>
         </div>
     </x-slot>
@@ -69,15 +74,12 @@
                                         style="background: linear-gradient(to bottom, transparent,rgba(0,0,0,0.8) 100%), url({{ asset($image->getImageUrl()) }}); background-repeat: no-repeat; object-fit: contain; background-position: center">
                                         <div class="px-6 py-4 w-full">
                                             <div class="absolute top-4 right-4 flex gap-2">
-                                                @if(auth()->user()->id === $image->user_id)
-                                                    <form action="{{ route('image.destroy', $image) }}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <x-secondary-button type="submit" style="padding: 10px; width: 30px;height: 30px">
-                                                            <i class="fas fa-times"></i>
-                                                        </x-secondary-button>
-                                                    </form>
-                                                @endif
+                                                <x-danger-button style="padding: 10px; width: 30px;height: 30px"
+                                                                 class="flex justify-center items-center" type="button"
+                                                                 data-modal-toggle="delete-modal-{{ $image->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </x-danger-button>
+                                                @include('partials.delete-modal', ['id' => $image->id, 'route' => route('image.destroy', $image)])
                                             </div>
                                             <div class="flex gap-2 pb-2">
                                             <span
@@ -94,7 +96,8 @@
                                                       :value="asset($image->getImageUrl())"/>
                                         <x-secondary-button
                                             type="button" data-copy="{{ asset($image->getImageUrl()) }}"
-                                            onclick="copyToClipboard(this)" style="padding-left: 12px; padding-right: 12px">
+                                            onclick="copyToClipboard(this)"
+                                            style="padding-left: 12px; padding-right: 12px">
                                             <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
                                         </x-secondary-button>
                                     </div>
@@ -120,8 +123,16 @@
 
         element.innerHTML = "<i class='text-xs fas fa-clipboard-check text-gray-600 w-[12px] h-[16px] text-primary'></i>";
 
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             element.innerHTML = "<i class='text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]'></i>";
         }, 2000);
     }
+
+    document.getElementById('image').addEventListener('change', function (e) {
+        var fileName = e.target.files[0].name;
+        var nameInput = document.getElementById('name');
+        if (nameInput.value === '') {
+            nameInput.value = fileName;
+        }
+    });
 </script>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AuthorisationController;
 use App\Http\Controllers\Admin\WorkspaceController as AdminWorkspaceController;
 use App\Http\Controllers\Api\ApiCommentController;
+use App\Http\Controllers\Api\ApiStatController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
@@ -30,6 +31,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::prefix('admin/workspace')->as('admin.workspace.')->group(function () {
         Route::get('/create', [AdminWorkspaceController::class, 'create'])->name('create');
         Route::post('/', [AdminWorkspaceController::class, 'store'])->name('store');
+        Route::get('/{slug}/show', [AdminWorkspaceController::class, 'show'])->name('show');
         Route::get('/{workspace}', [AdminWorkspaceController::class, 'edit'])->name('edit');
         Route::put('/{workspace}', [AdminWorkspaceController::class, 'update'])->name('update');
         Route::get('/{workspace}/users', [AdminWorkspaceController::class, 'users'])->name('users');
@@ -39,6 +41,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
     Route::prefix('admin/authorisation')->as('admin.authorisation.')->group(function () {
         Route::get('/{workspace}', [AuthorisationController::class, 'show'])->name('show');
+        Route::put('/{workspace}', [AuthorisationController::class, 'update'])->name('update');
     });
 });
 
@@ -48,15 +51,17 @@ Route::middleware('auth')->group(function () {
 
         Route::get('{slug}/images', [ImageController::class, 'show'])->name('image.show');
         Route::post('{slug}/images', [ImageController::class, 'store'])->name('image.store');
-        Route::delete('{image}', [ImageController::class, 'destroy'])->name('image.destroy');
+        Route::delete('{image}/delete-image', [ImageController::class, 'destroy'])->name('image.destroy');
 
         Route::get('{slug}/comments', [CommentController::class, 'show'])->name('comment.show');
+        Route::delete('{comment}/delete-comment', [CommentController::class, 'destroy'])->name('comment.destroy');
     });
 
 });
 
 Route::prefix('api')->as('api.')->group(function () {
     Route::post('comment/{workspace}', [ApiCommentController::class, 'store'])->name('comment.store');
+    Route::post('stat/{workspace}', [ApiStatController::class, 'store'])->name('stat.store');
 });
 
 require __DIR__ . '/auth.php';

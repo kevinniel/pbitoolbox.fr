@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('workspaces_id')->unique();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->boolean('can_access_image')->default(false);
+            $table->boolean('can_access_comment')->default(false);
             $table->timestamps();
         });
     }

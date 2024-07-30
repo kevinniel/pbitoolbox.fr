@@ -15,6 +15,13 @@ class Workspace extends Model
         'workspaces_id',
         'name',
         'slug',
+        'can_access_comment',
+        'can_access_image',
+    ];
+
+    protected $casts = [
+        'can_access_comment' => 'boolean',
+        'can_access_image' => 'boolean',
     ];
 
     public function users(): BelongsToMany
@@ -30,5 +37,10 @@ class Workspace extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function stats(): HasMany
+    {
+        return $this->hasMany(Stat::class);
     }
 }

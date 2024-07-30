@@ -17,6 +17,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'content' => ['required', 'string'],
+            'key' => ['required', 'string'],
 //            'user_id' => ['required', 'integer', 'exists:users,id'],
 //            'workspace_id' => ['required', 'integer', 'exists:workspaces,id'],
         ];
@@ -27,6 +28,8 @@ class CommentRequest extends FormRequest
         return [
             'content.required' => 'Le commentaire est obligatoire.',
             'content.string' => 'Le commentaire doit être une chaîne de caractères.',
+            'key.required' => 'La clé est obligatoire.',
+            'key.string' => 'La clé doit être une chaîne de caractères.',
 //            'user_id.required' => 'User ID is required',
 //            'user_id.integer' => 'User ID must be an integer',
 //            'user_id.exists' => 'User ID does not exist',

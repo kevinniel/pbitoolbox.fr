@@ -12,9 +12,22 @@ class ApiCommentController extends Controller
 {
     public function store(Workspace $workspace, CommentRequest $request): JsonResponse
     {
+        $key = $request->get('key');
         $lastId = Comment::orderBy('id', 'desc')->first() ? Comment::orderBy('id', 'desc')->first()->id : 0;
 
+        $comment = Comment::where('key', $key)->first();
+
+        if ($comment !== null) {
+            $comment->update([
+                'key' => $key,
+                'content' => $request->get('content'),
+            ]);
+
+            return response()->json(['message' => 'Comment updated'], 200);
+        }
+
         Comment::create([
+            'key' => $key,
             'comments_id' => 'comments_' . $lastId + 1,
             'content' => $request->get('content'),
             'workspace_id' => $workspace->id,
