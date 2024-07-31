@@ -20,8 +20,7 @@
                             <div class="border border-gray-200 rounded-lg">
                                 <div class="p-4 relative">
                                     <a href="{{ route('admin.workspace.show', $workspace->slug) }}" class="text-md pb-1 font-bold">{{ $workspace->name }}</a>
-                                    <p class="text-gray-500 text-sm">{{ $workspace->users_count }} utilisateurs | 3
-                                        modules</p>
+                                    <p class="text-gray-500 text-sm">{{ $workspace->users_count }} utilisateurs</p>
                                     <div class="absolute top-4 right-4">
                                         <a href="{{ route('admin.workspace.edit', $workspace) }}"
                                            class="normal-case text-sm font-medium opacity-40 hover:opacity-100">
@@ -30,9 +29,25 @@
                                     </div>
                                 </div>
                                 <div class="px-4 mb-4">
-                                    <p class="font-semibold text-sm pb-1">Api module :</p>
-                                    <p class="text-sm text-gray-500">Commentaire : {{ env('APP_URL') . '/comment/' . $workspace->id }}</p>
-                                    <p class="text-sm text-gray-500">Statistique : {{ env('APP_URL') . '/stat/' . $workspace->id }}</p>
+                                    <p class="font-semibold text-sm pb-1">Urls Api module :</p>
+                                    <div class="flex items-center justify-between gap-1 mt-2">
+                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs" :value="env('APP_URL') . '/comment/' . $workspace->id"/>
+                                        <x-secondary-button
+                                            type="button" data-copy="{{ env('APP_URL') . '/comment/' . $workspace->id }}"
+                                            onclick="copyToClipboard(this)"
+                                            style="padding-left: 12px; padding-right: 12px">
+                                            <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
+                                        </x-secondary-button>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-1 mt-2">
+                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs" :value="env('APP_URL') . '/stat/' . $workspace->id"/>
+                                        <x-secondary-button
+                                            type="button" data-copy="{{ env('APP_URL') . '/stat/' . $workspace->id }}"
+                                            onclick="copyToClipboard(this)"
+                                            style="padding-left: 12px; padding-right: 12px">
+                                            <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
+                                        </x-secondary-button>
+                                    </div>
                                 </div>
                                 <div class="border-t border-gray-200 grid grid-cols-2">
                                     <a href="{{ route('admin.workspace.users', $workspace) }}"
@@ -52,3 +67,29 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function copyToClipboard(element) {
+        var text = element.getAttribute('data-copy');
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        element.innerHTML = "<i class='text-xs fas fa-clipboard-check text-gray-600 w-[12px] h-[16px] text-primary'></i>";
+
+        window.setTimeout(function () {
+            element.innerHTML = "<i class='text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]'></i>";
+        }, 2000);
+    }
+
+    document.getElementById('image').addEventListener('change', function (e) {
+        var fileName = e.target.files[0].name;
+        var nameInput = document.getElementById('name');
+        if (nameInput.value === '') {
+            nameInput.value = fileName;
+        }
+    });
+</script>
