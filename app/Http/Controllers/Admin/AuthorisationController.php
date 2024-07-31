@@ -24,6 +24,6 @@ class AuthorisationController extends Controller
             'can_access_comment' => $request->get('can_access_comment'),
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Les modules ont bien été mis à jour.');
     }
 }

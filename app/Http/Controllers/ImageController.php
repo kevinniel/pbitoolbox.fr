@@ -44,13 +44,13 @@ class ImageController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'L\'image a bien été ajoutée.');
     }
 
     public function destroy(Image $image): RedirectResponse
     {
         $image->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'L\'image a bien été supprimée.');
     }
 }

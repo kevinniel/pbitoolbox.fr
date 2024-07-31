@@ -50,6 +50,6 @@ class CommentController extends Controller
     {
         $comment->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Le commentaire a bien été supprimé.');
     }
 }

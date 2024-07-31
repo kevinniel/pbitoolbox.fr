@@ -39,7 +39,7 @@ class WorkspaceController extends Controller
             'workspaces_id' => 'workspaces_' . $lastId + 1,
         ]);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Le workspace a bien été créé.');
     }
 
     public function edit(Workspace $workspace): View
@@ -54,7 +54,7 @@ class WorkspaceController extends Controller
             'slug' => Str::slug($request->get('name')),
         ]);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Le workspace a bien été modifié.');
     }
 
     public function users(Workspace $workspace): View
