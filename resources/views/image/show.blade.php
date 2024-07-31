@@ -67,6 +67,11 @@
                             </h2>
                         </header>
                         <div class="grid grid-cols-4 gap-5">
+                            @if(count($images) === 0)
+                                <div>
+                                    <p class="text-gray-500">Aucune image trouvé</p>
+                                </div>
+                            @endif
                             @foreach($images as $image)
                                 <article class="space-y-2.5">
                                     <div

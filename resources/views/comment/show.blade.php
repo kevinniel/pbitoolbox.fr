@@ -50,6 +50,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(count($comments) === 0)
+                        <div class="text-center">
+                            <p class="text-gray-500">Aucun commentaire trouvé</p>
+                        </div>
+                    @endif
                     <div class="space-y-4">
                         @foreach($comments as $comment)
                             <div class="border border-gray-200 rounded-lg">
