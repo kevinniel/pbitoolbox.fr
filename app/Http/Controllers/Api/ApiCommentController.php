@@ -35,4 +35,15 @@ class ApiCommentController extends Controller
 
         return response()->json(['message' => 'Comment created'], 201);
     }
+
+    public function show(string $key): JsonResponse
+    {
+        $comment = Comment::where('key', $key)->first();
+
+        if ($comment === null) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        return response()->json($comment, 200);
+    }
 }
