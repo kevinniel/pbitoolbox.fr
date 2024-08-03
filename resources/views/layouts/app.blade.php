@@ -13,9 +13,10 @@
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Righteous&display=swap"
         rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"/>
+{{--    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>--}}
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
