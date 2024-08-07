@@ -8,6 +8,7 @@
     <title>Celul</title>
     <link rel="shortcut icon" href="{{ asset("images/icon.png") }}">
     <link rel="icon" type="image/png" href="{{ asset("images/icon.png") }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset("images/icon.png") }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
