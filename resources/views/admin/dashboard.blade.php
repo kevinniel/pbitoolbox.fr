@@ -23,12 +23,12 @@
                                        class="text-md pb-1 font-bold">{{ $workspace->name }}</a>
                                     <p class="text-gray-500 text-sm">
                                         {{ $workspace->users_count }} utilisateurs
-                                        @if($workspace->can_access_image)
+                                        @if($workspace->can_access_image === true)
                                             <i class="fas fa-image ml-1 text-primary"></i>
                                         @else
                                             <i class="fas fa-image ml-1"></i>
                                         @endif
-                                        @if($workspace->can_access_comment)
+                                        @if($workspace->can_access_comment === true)
                                             <i class="fas fa-comment ml-1 text-primary"></i>
                                         @else
                                             <i class="fas fa-comment ml-1"></i>
