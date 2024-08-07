@@ -19,8 +19,21 @@
                         @foreach($workspaces as $workspace)
                             <div class="border border-gray-200 rounded-lg">
                                 <div class="p-4 relative">
-                                    <a href="{{ route('admin.workspace.show', $workspace->slug) }}" class="text-md pb-1 font-bold">{{ $workspace->name }}</a>
-                                    <p class="text-gray-500 text-sm">{{ $workspace->users_count }} utilisateurs</p>
+                                    <a href="{{ route('admin.workspace.show', $workspace->slug) }}"
+                                       class="text-md pb-1 font-bold">{{ $workspace->name }}</a>
+                                    <p class="text-gray-500 text-sm">
+                                        {{ $workspace->users_count }} utilisateurs
+                                        @if($workspace->can_access_image)
+                                            <i class="fas fa-image ml-1 text-primary"></i>
+                                        @else
+                                            <i class="fas fa-image ml-1"></i>
+                                        @endif
+                                        @if($workspace->can_access_comment)
+                                            <i class="fas fa-comment ml-1 text-primary"></i>
+                                        @else
+                                            <i class="fas fa-comment ml-1"></i>
+                                        @endif
+                                    </p>
                                     <div class="absolute top-4 right-4">
                                         <a href="{{ route('admin.workspace.edit', $workspace) }}"
                                            class="normal-case text-sm font-medium opacity-40 hover:opacity-100">
@@ -31,16 +44,19 @@
                                 <div class="px-4 mb-4">
                                     <p class="font-semibold text-sm pb-1">Urls Api module :</p>
                                     <div class="flex items-center justify-between gap-1 mt-2">
-                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs" :value="env('APP_URL') . '/comment/' . $workspace->id"/>
+                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs"
+                                                      :value="env('APP_URL') . '/comment/' . $workspace->id"/>
                                         <x-secondary-button
-                                            type="button" data-copy="{{ env('APP_URL') . '/comment/' . $workspace->id }}"
+                                            type="button"
+                                            data-copy="{{ env('APP_URL') . '/comment/' . $workspace->id }}"
                                             onclick="copyToClipboard(this)"
                                             style="padding-left: 12px; padding-right: 12px">
                                             <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
                                         </x-secondary-button>
                                     </div>
                                     <div class="flex items-center justify-between gap-1 mt-2">
-                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs" :value="env('APP_URL') . '/stat/' . $workspace->id"/>
+                                        <x-text-input type="text" class="block w-full text-gray-500 text-xs"
+                                                      :value="env('APP_URL') . '/stat/' . $workspace->id"/>
                                         <x-secondary-button
                                             type="button" data-copy="{{ env('APP_URL') . '/stat/' . $workspace->id }}"
                                             onclick="copyToClipboard(this)"

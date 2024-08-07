@@ -16,7 +16,27 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    @if(auth()->user()->is_admin)
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-12">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <p class="font-semibold text-sm pb-1">Urls Api module commentaire :</p>
+                    <div class="flex items-center justify-between gap-1 mt-2">
+                        <x-text-input type="text" class="block w-full text-gray-500 text-xs"
+                                      :value="env('APP_URL') . '/comment/' . $workspace->id"/>
+                        <x-secondary-button
+                            type="button" data-copy="{{ env('APP_URL') . '/comment/' . $workspace->id }}"
+                            onclick="copyToClipboard(this)"
+                            style="padding-left: 12px; padding-right: 12px">
+                            <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
+                        </x-secondary-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <div class="@if(auth()->user()->is_admin) py-6 @else py-12 @endif">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -63,7 +83,10 @@
                                         <p class="text-gray-500 text-sm">“{{ $comment->content }}”</p>
                                     </div>
                                     <div class="flex gap-2">
-                                        <x-link-button-secondary target="_blank" link="{{ route('api.comment.show', $comment->key) }}" style="padding: 10px; width: 30px;height: 30px" class="flex justify-center items-center">
+                                        <x-link-button-secondary target="_blank"
+                                                                 link="{{ route('api.comment.show', $comment->key) }}"
+                                                                 style="padding: 10px; width: 30px;height: 30px"
+                                                                 class="flex justify-center items-center">
                                             <i class="fas fa-eye"></i>
                                         </x-link-button-secondary>
                                         <x-danger-button style="padding: 10px; width: 30px;height: 30px"
