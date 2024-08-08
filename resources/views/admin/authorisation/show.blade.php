@@ -34,6 +34,14 @@
                                        name="can_access_comment" @checked($workspace->can_access_comment)>
                             </label>
                         </div>
+                        <div class="border border-gray-200 rounded-lg">
+                            <label for="can_access_stat" class="flex items-center justify-between p-5">
+                                <span class="ms-2 text-gray-600">Module Statistiques</span>
+                                <input id="can_access_stat" type="checkbox"
+                                       class="rounded border-gray-300 text-primary shadow-sm focus:ring-primary w-6 h-6"
+                                       name="can_access_stat" @checked($workspace->can_access_stat)>
+                            </label>
+                        </div>
                         <div>
                             <x-primary-button type="submit">Enregistrer</x-primary-button>
                         </div>

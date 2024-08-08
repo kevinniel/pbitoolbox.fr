@@ -31,7 +31,7 @@
                                   class="mt-6 space-y-6"
                                   enctype="multipart/form-data">
                                 @csrf
-                                <div class="flex gap-4 justify-between w-full items-end">
+                                <div class="flex gap-4 justify-between w-full items-end flex-col md:flex-row">
                                     <div class="w-full">
                                         <x-input-label for="name" :value="__('Nom')"/>
                                         <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
@@ -66,7 +66,7 @@
                                 Images
                             </h2>
                         </header>
-                        <div class="grid grid-cols-4 gap-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                             @if(count($images) === 0)
                                 <div>
                                     <p class="text-gray-500">Aucune image trouvé</p>

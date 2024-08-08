@@ -41,7 +41,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form method="get" action="{{ route('comment.show', $workspace->slug) }}"
-                          class="flex items-end gap-4">
+                          class="flex items-start md:items-end gap-4 flex-col md:flex-row">
                         <div class="w-full">
                             <x-input-label for="content" :value="__('Message')"/>
                             <x-text-input id="content" name="content" type="text" class="mt-1 block w-full"

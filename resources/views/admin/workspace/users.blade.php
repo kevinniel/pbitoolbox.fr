@@ -24,7 +24,7 @@
                             <form method="post" action="{{ route('admin.workspace.addUser', $workspace) }}"
                                   class="mt-6 space-y-6">
                                 @csrf
-                                <div class="flex justify-between gap-4">
+                                <div class="flex justify-between gap-4 flex-col md:flex-row">
                                     <div class="w-full">
                                         <x-input-label for="name" :value="__('Nom')"/>
                                         <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
@@ -60,7 +60,7 @@
                                 </h2>
                             </header>
                             <div class="mt-6">
-                                <div class="grid grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     @foreach($workspace->users as $user)
                                         <div class="border border-gray-200 rounded-lg">
                                             <div class="p-4 relative">

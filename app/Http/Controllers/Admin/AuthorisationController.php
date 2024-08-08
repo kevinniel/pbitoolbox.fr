@@ -22,6 +22,7 @@ class AuthorisationController extends Controller
         $workspace->update([
             'can_access_image' => $request->get('can_access_image'),
             'can_access_comment' => $request->get('can_access_comment'),
+            'can_access_stat' => $request->get('can_access_stat'),
         ]);
 
         return redirect()->back()->with('success', 'Les modules ont bien été mis à jour.');

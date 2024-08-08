@@ -19,6 +19,7 @@ class AuthorisationRequest extends FormRequest
         return [
             'can_access_image' => ['boolean', 'required'],
             'can_access_comment' => ['boolean', 'required'],
+            'can_access_stat' => ['boolean', 'required'],
         ];
     }
 
@@ -27,6 +28,7 @@ class AuthorisationRequest extends FormRequest
         $this->merge([
             'can_access_image' => $this->boolean('can_access_image'),
             'can_access_comment' => $this->boolean('can_access_comment'),
+            'can_access_stat' => $this->boolean('can_access_stat'),
         ]);
     }
 }

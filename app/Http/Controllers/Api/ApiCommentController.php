@@ -12,6 +12,10 @@ class ApiCommentController extends Controller
 {
     public function store(Workspace $workspace, CommentRequest $request): JsonResponse
     {
+        if($workspace->can_access_comment === false) {
+            return response()->json(['message' => 'The module must be enabled to add or edit a comment.'], 401);
+        }
+
         $key = $request->get('key');
         $lastId = Comment::orderBy('id', 'desc')->first() ? Comment::orderBy('id', 'desc')->first()->id : 0;
 

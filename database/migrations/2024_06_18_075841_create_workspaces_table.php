@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->boolean('can_access_image')->default(false);
             $table->boolean('can_access_comment')->default(false);
+            $table->boolean('can_access_stat')->default(false);
             $table->timestamps();
         });
     }

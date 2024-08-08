@@ -17,11 +17,13 @@ class Workspace extends Model
         'slug',
         'can_access_comment',
         'can_access_image',
+        'can_access_stat',
     ];
 
     protected $casts = [
         'can_access_comment' => 'boolean',
         'can_access_image' => 'boolean',
+        'can_access_stat' => 'boolean',
     ];
 
     public function users(): BelongsToMany

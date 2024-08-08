@@ -12,6 +12,10 @@ class ApiStatController extends Controller
 {
     public function store(Workspace $workspace, StatRequest $request): JsonResponse
     {
+        if($workspace->can_access_stat === false) {
+            return response()->json(['message' => 'The module must be enabled to add stat.'], 401);
+        }
+
         $lastId = Stat::orderBy('id', 'desc')->first() ? Stat::orderBy('id', 'desc')->first()->id : 0;
 
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between sm:items-center flex-col sm:flex-row" style="gap: 12px">
             <h2 class="font-medium text-xl text-gray-800 leading-tight">
                 Tableau de board
             </h2>
@@ -15,7 +15,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($workspaces as $workspace)
                             <div class="border border-gray-200 rounded-lg">
                                 <div class="p-4 relative">
@@ -32,6 +32,11 @@
                                             <i class="fas fa-comment ml-1 text-primary"></i>
                                         @else
                                             <i class="fas fa-comment ml-1"></i>
+                                        @endif
+                                        @if($workspace->can_access_stat === true)
+                                            <i class="fas fa-chart-bar ml-1 text-primary"></i>
+                                        @else
+                                            <i class="fas fa-chart-bar ml-1"></i>
                                         @endif
                                     </p>
                                     <div class="absolute top-4 right-4">
