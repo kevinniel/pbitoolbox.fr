@@ -31,7 +31,7 @@ class LoginEmail extends Mailable
                 'email' => $this->email,
                 'name' => $this->name,
                 'token' => $this->token,
-                'imageUrl' => asset('images/logo.png'),
+                'imageUrl' => config('app.url') . '/images/logo.png',
             ]);
     }
 }
