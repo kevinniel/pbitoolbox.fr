@@ -19,7 +19,13 @@
     <tbody>
     <tr style="width:100%">
         <td>
-            <img src="{{ asset('images/logo.png') }}" alt="Logo"
+{{--            <img src="{{ asset('images/logo.png') }}" alt="Logo"--}}
+{{--                 style="display:block;outline:none;border:none;text-decoration:none;width:auto;height:42px"--}}
+{{--                 width="130"--}}
+{{--                 height="42"--}}
+{{--            />--}}
+
+            <img src="srctest" alt="Logo"
                  style="display:block;outline:none;border:none;text-decoration:none;width:auto;height:42px"
                  width="130"
                  height="42"
