@@ -134,10 +134,8 @@
     }
 
     document.getElementById('image').addEventListener('change', function (e) {
-        var fileName = e.target.files[0].name;
-        var nameInput = document.getElementById('name');
-        if (nameInput.value === '') {
-            nameInput.value = fileName;
-        }
+        const fileName = e.target.files[0].name;
+        const nameInput = document.getElementById('name');
+        nameInput.value = fileName;
     });
 </script>
