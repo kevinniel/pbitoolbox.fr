@@ -26,7 +26,8 @@
                                     utilisateurs.
                                 </p>
                             </header>
-                            <form method="post" action="{{ route('admin.workspace.update', $workspace) }}" class="mt-6 space-y-6">
+                            <form method="post" action="{{ route('admin.workspace.update', $workspace) }}"
+                                  class="mt-6 space-y-6">
                                 @csrf
                                 @method('put')
                                 <div>
@@ -36,10 +37,18 @@
                                                   autocomplete="name"/>
                                     <x-input-error class="mt-2" :messages="$errors->get('name')"/>
                                 </div>
-                                <div class="flex items-center gap-4">
+                                <div class="flex items-center gap-2">
                                     <x-primary-button>Modifier</x-primary-button>
                                 </div>
                             </form>
+                            <div class="mt-6">
+                                <h3 class="mb-3">Supprimer le workspace</h3>
+                                <x-danger-button type class="flex justify-center items-center" type="button"
+                                                 data-modal-toggle="delete-modal-{{ $workspace->id }}">
+                                    Supprimer
+                                </x-danger-button>
+                                @include('partials.delete-modal', ['id' => $workspace->id, 'route' => route('admin.workspace.destroy', $workspace)])
+                            </div>
                         </section>
                     </div>
                 </div>

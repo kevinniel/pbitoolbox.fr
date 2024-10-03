@@ -34,6 +34,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         Route::get('/{slug}/show', [AdminWorkspaceController::class, 'show'])->name('show');
         Route::get('/{workspace}', [AdminWorkspaceController::class, 'edit'])->name('edit');
         Route::put('/{workspace}', [AdminWorkspaceController::class, 'update'])->name('update');
+        Route::delete('/{workspace}/delete-workspace', [AdminWorkspaceController::class, 'destroy'])->name('destroy');
         Route::get('/{workspace}/users', [AdminWorkspaceController::class, 'users'])->name('users');
         Route::post('/{workspace}/addUser', [AdminWorkspaceController::class, 'addUser'])->name('addUser');
         Route::delete('/{workspace}/removeUser', [AdminWorkspaceController::class, 'removeUser'])->name('removeUser');

@@ -99,4 +99,12 @@ class WorkspaceController extends Controller
 
         return view('admin.workspace.users', ['workspace' => $workspace]);
     }
+
+    public function destroy(Workspace $workspace): RedirectResponse
+    {
+        $workspace->delete();
+
+        return redirect()->route('admin.dashboard')
+            ->with('success', 'Le workspace a bien été supprimé.');
+    }
 }
