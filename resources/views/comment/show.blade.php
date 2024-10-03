@@ -23,9 +23,9 @@
                     <p class="font-semibold text-sm pb-1">Urls Api module commentaire :</p>
                     <div class="flex items-center justify-between gap-1 mt-2">
                         <x-text-input type="text" class="block w-full text-gray-500 text-xs"
-                                      :value="env('APP_URL') . '/comment/' . $workspace->id"/>
+                                      :value="env('APP_URL') . '/api/comment/' . $workspace->id"/>
                         <x-secondary-button
-                            type="button" data-copy="{{ env('APP_URL') . '/comment/' . $workspace->id }}"
+                            type="button" data-copy="{{ env('APP_URL') . '/api/comment/' . $workspace->id }}"
                             onclick="copyToClipboard(this)"
                             style="padding-left: 12px; padding-right: 12px">
                             <i class="text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]"></i>
@@ -110,3 +110,21 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function copyToClipboard(element) {
+        var text = element.getAttribute('data-copy');
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+
+        element.innerHTML = "<i class='text-xs fas fa-clipboard-check text-gray-600 w-[12px] h-[16px] text-primary'></i>";
+
+        window.setTimeout(function () {
+            element.innerHTML = "<i class='text-xs fas fa-copy text-gray-600 w-[12px] h-[16px]'></i>";
+        }, 2000);
+    }
+</script>
