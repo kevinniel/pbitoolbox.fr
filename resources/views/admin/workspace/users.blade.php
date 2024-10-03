@@ -67,16 +67,11 @@
                                                 <h3 class="text-md font-medium pb-1">{{ $user->name }}</h3>
                                                 <p class="text-gray-500 text-sm">{{ $user->email }}</p>
                                                 <div class="absolute top-2 right-4">
-                                                    <form
-                                                        action="{{ route('admin.workspace.removeUser', $workspace) }} "
-                                                        method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                        <button type="submit" class="normal-case text-sm font-medium">
-                                                            <i class="fas fa-times text-gray-400 duration-200 hover:text-gray-700"></i>
-                                                        </button>
-                                                    </form>
+                                                    <button type="button"
+                                                                     data-modal-toggle="delete-modal-{{ $user->id }}">
+                                                        <i class="fas fa-times text-gray-400 duration-200 hover:text-gray-700"></i>
+                                                    </button>
+                                                    @include('partials.delete-modal', ['id' => $user->id, 'route' => route('admin.workspace.removeUser', ['workspace' => $workspace, 'user' => $user])])
                                                 </div>
                                             </div>
                                         </div>

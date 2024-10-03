@@ -11,7 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\Request;
 
 class WorkspaceController extends Controller
 {
@@ -62,7 +61,7 @@ class WorkspaceController extends Controller
         return view('admin.workspace.users', ['workspace' => $workspace]);
     }
 
-    public function addUser(UserRequest $request, Workspace $workspace): View
+    public function addUser(UserRequest $request, Workspace $workspace): RedirectResponse
     {
         $userExist = User::where('email', $request->get('email'))->first();
 
@@ -70,10 +69,9 @@ class WorkspaceController extends Controller
             if (!$workspace->users()->where('user_id', $userExist->id)->exists()) {
                 $workspace->users()->attach($userExist);
 
-                return view('admin.workspace.users', ['workspace' => $workspace]);
+                return redirect()->back()->with('success', 'L\'utilisateur a bien été créé.');
             } else {
-                return view('admin.workspace.users', ['workspace' => $workspace])
-                    ->withErrors(['email' => 'L\'utilisateur existe déjà dans le workspace.']);
+                return redirect()->back()->withErrors(['email' => 'L\'utilisateur existe déjà dans le workspace.']);
             }
         }
 
@@ -88,16 +86,14 @@ class WorkspaceController extends Controller
 
         $workspace->users()->attach($user);
 
-        return view('admin.workspace.users', ['workspace' => $workspace]);
+        return redirect()->back()->with('success', 'L\'utilisateur a bien été créé.');
     }
 
-    public function removeUser(Workspace $workspace, Request $request): View
+    public function removeUser(Workspace $workspace, User $user): RedirectResponse
     {
-        $user = User::findOrFail($request->get('user_id'));
-
         $workspace->users()->detach($user);
 
-        return view('admin.workspace.users', ['workspace' => $workspace]);
+        return redirect()->back()->with('success', 'L\'utilisateur a bien été supprimé.');
     }
 
     public function destroy(Workspace $workspace): RedirectResponse

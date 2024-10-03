@@ -37,7 +37,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
         Route::delete('/{workspace}/delete-workspace', [AdminWorkspaceController::class, 'destroy'])->name('destroy');
         Route::get('/{workspace}/users', [AdminWorkspaceController::class, 'users'])->name('users');
         Route::post('/{workspace}/addUser', [AdminWorkspaceController::class, 'addUser'])->name('addUser');
-        Route::delete('/{workspace}/removeUser', [AdminWorkspaceController::class, 'removeUser'])->name('removeUser');
+        Route::delete('/{workspace}/{user}/removeUser', [AdminWorkspaceController::class, 'removeUser'])->name('removeUser');
     });
 
     Route::prefix('admin/authorisation')->as('admin.authorisation.')->group(function () {
