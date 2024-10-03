@@ -14,13 +14,13 @@
                         <x-nav-link
                             :href="route('admin.dashboard')"
                             :active="request()->routeIs('admin.dashboard')">
-                            Tableau de board
+                            Tableau de bord
                         </x-nav-link>
                     @else
                         <x-nav-link
                             :href="route('dashboard')"
                             :active="request()->routeIs('dashboard')">
-                            Tableau de board
+                            Tableau de bord
                         </x-nav-link>
                     @endif
                 </div>
@@ -83,13 +83,13 @@
                 <x-responsive-nav-link
                     :href="route('admin.dashboard')"
                     :active="request()->routeIs('admin.dashboard')">
-                    Tableau de board
+                    Tableau de bord
                 </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link
                     :href="route('dashboard')"
                     :active="request()->routeIs('dashboard')">
-                    Tableau de board
+                    Tableau de bord
                 </x-responsive-nav-link>
             @endif
         </div>

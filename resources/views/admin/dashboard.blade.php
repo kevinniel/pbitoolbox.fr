@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between sm:items-center flex-col sm:flex-row" style="gap: 12px">
             <h2 class="font-medium text-xl text-gray-800 leading-tight">
-                Tableau de board
+                Tableau de bord
             </h2>
             <div>
                 <x-link-button-primary link="{{ route('admin.workspace.create') }}">Créer un Workspace
