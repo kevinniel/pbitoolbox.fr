@@ -11,7 +11,7 @@ class AdminDashboardController extends Controller
     public function index(): View
     {
         return view('admin.dashboard', [
-            'workspaces' => Workspace::withCount('users')->orderBy('id', 'desc')->get(),
+            'workspaces' => Workspace::withCount('users')->orderBy('name')->get(),
         ]);
     }
 }
