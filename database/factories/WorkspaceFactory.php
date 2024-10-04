@@ -24,6 +24,7 @@ class WorkspaceFactory extends Factory
 
         return [
             'workspaces_id' => 'workspaces_' . $lastId + 1,
+            'uuid' => Str::uuid(),
             'name' => $name,
             'slug' => $slug,
         ];

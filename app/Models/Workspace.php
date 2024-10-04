@@ -13,6 +13,7 @@ class Workspace extends Model
 
     protected $fillable = [
         'workspaces_id',
+        'uuid',
         'name',
         'slug',
         'can_access_comment',

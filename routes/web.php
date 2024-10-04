@@ -61,9 +61,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('api')->as('api.')->group(function () {
-    Route::post('comment/{workspace}', [ApiCommentController::class, 'store'])->name('comment.store');
+    Route::post('comment/{uuid}', [ApiCommentController::class, 'store'])->name('comment.store');
     Route::get('comment/{key}', [ApiCommentController::class, 'show'])->name('comment.show');
-    Route::post('stat/{workspace}', [ApiStatController::class, 'store'])->name('stat.store');
+    Route::post('stat/{uuid}', [ApiStatController::class, 'store'])->name('stat.store');
 });
 
 require __DIR__ . '/auth.php';

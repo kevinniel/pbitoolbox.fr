@@ -36,6 +36,7 @@ class WorkspaceController extends Controller
             ...$request->validated(),
             'slug' => Str::slug($request->get('name')),
             'workspaces_id' => 'workspaces_' . $lastId + 1,
+            'uuid' => Str::uuid(),
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Le workspace a bien été créé.');

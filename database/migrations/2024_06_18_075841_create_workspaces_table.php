@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
             $table->string('workspaces_id')->unique();
+            $table->string('uuid')->unique();
             $table->string('name');
             $table->string('slug')->unique();
             $table->boolean('can_access_image')->default(false);

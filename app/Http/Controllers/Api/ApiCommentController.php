@@ -10,8 +10,10 @@ use Illuminate\Http\JsonResponse;
 
 class ApiCommentController extends Controller
 {
-    public function store(Workspace $workspace, CommentRequest $request): JsonResponse
+    public function store(string $uuid, CommentRequest $request): JsonResponse
     {
+        $workspace = Workspace::where('uuid', $uuid)->firstOrFail();
+
         if($workspace->can_access_comment === false) {
             return response()->json(['message' => 'The module must be enabled to add or edit a comment.'], 401);
         }

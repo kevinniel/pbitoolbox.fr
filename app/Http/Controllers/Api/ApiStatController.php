@@ -10,8 +10,10 @@ use Illuminate\Http\JsonResponse;
 
 class ApiStatController extends Controller
 {
-    public function store(Workspace $workspace, StatRequest $request): JsonResponse
+    public function store(string $uuid, StatRequest $request): JsonResponse
     {
+        $workspace = Workspace::where('uuid', $uuid)->firstOrFail();
+
         if($workspace->can_access_stat === false) {
             return response()->json(['message' => 'The module must be enabled to add stat.'], 401);
         }
