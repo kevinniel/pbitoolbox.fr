@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="px-4 mb-4">
-                                    <p class="font-semibold text-sm pb-1">Urls Api module :</p>
+                                    <p class="font-semibold text-sm pb-1">Urls API :</p>
                                     <div class="flex items-center justify-between gap-1 mt-2">
                                         <x-text-input type="text" class="block w-full text-gray-500 text-xs"
                                                       :value="env('APP_URL') . '/api/comment/' . $workspace->uuid"/>

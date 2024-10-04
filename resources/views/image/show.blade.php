@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-medium text-xl text-gray-800 leading-tight">
-                {{ $workspace->name }} / Module Images
+                {{ $workspace->name }} / Images
             </h2>
             <div>
                 @if(auth()->user()->is_admin)
