@@ -36,6 +36,17 @@
                                 </a>
                             </div>
                         @endif
+                        @if($workspace->can_access_stat)
+                            <div class="border border-gray-200 rounded-lg">
+                                <div>
+                                    <div class="p-4 relative">
+                                        <h3 class="text-md font-medium pb-1">Statistiques</h3>
+                                        <p class="text-gray-500 text-sm">{{ count($workspace->stats) }}
+                                            Statistiques</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
