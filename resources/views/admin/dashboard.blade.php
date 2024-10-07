@@ -1,5 +1,3 @@
-@php(phpinfo())
-
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between sm:items-center flex-col sm:flex-row" style="gap: 12px">
