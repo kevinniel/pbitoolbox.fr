@@ -49,6 +49,12 @@ class ImageController extends Controller
 
     public function destroy(Image $image): RedirectResponse
     {
+        $filePath = storage_path('app/public/' . $image->url);
+
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
         $image->delete();
 
         return redirect()->back()->with('success', 'L\'image a bien été supprimée.');
