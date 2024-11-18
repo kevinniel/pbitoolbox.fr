@@ -78,7 +78,7 @@
                     <div class="space-y-4">
                         @foreach($comments as $comment)
                             <div class="border border-gray-200 rounded-lg">
-                                <div class="flex justify-between gap-2 p-4">
+                                <div class="flex justify-between gap-2 p-4" style="overflow-x: auto">
                                     <div class="relative">
                                         <p class="text-gray-500 text-sm">“{{ $comment->content }}”</p>
                                     </div>
