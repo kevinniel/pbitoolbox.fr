@@ -42,9 +42,11 @@ class ApiCommentController extends Controller
         return response()->json(['message' => 'Comment created'], 201);
     }
 
-    public function show(string $key): JsonResponse
+    public function show(string $uuid, string $key): JsonResponse
     {
-        $comment = Comment::where('key', $key)->first();
+        $workspace = Workspace::where('uuid', $uuid)->firstOrFail();
+
+        $comment = $workspace->comments()->where('key', $key)->first();
 
         if ($comment === null) {
             return response()->json(['message' => 'Comment not found'], 404);

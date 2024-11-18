@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('api')->as('api.')->group(function () {
     Route::post('comment/{uuid}', [ApiCommentController::class, 'store'])->name('comment.store');
-    Route::get('comment/{key}', [ApiCommentController::class, 'show'])->name('comment.show');
+    Route::get('comment/{uuid}/{key}', [ApiCommentController::class, 'show'])->name('comment.show');
     Route::post('stat/{uuid}', [ApiStatController::class, 'store'])->name('stat.store');
 });
 
