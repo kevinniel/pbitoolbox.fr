@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="flex gap-2">
                                         <x-link-button-secondary target="_blank"
-                                                                 link="{{ route('api.comment.show', $comment->key) }}"
+                                                                 link="{{ route('api.comment.show', ['uuid' => $workspace->uuid, 'key' => $comment->key]) }}"
                                                                  style="padding: 10px; width: 30px;height: 30px"
                                                                  class="flex justify-center items-center">
                                             <i class="fas fa-eye"></i>
