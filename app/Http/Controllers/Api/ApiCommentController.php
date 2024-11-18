@@ -21,7 +21,7 @@ class ApiCommentController extends Controller
         $key = $request->get('key');
         $lastId = Comment::orderBy('id', 'desc')->first() ? Comment::orderBy('id', 'desc')->first()->id : 0;
 
-        $comment = Comment::where('key', $key)->first();
+        $comment = $workspace->comments()->where('key', $key)->first();
 
         if ($comment !== null) {
             $comment->update([
